@@ -11,14 +11,9 @@ const item: IntakeItem = {
   claimedAt: undefined,
 };
 
-export const MockIntakeLive = Layer.effect(
-  Intake,
-  Effect.gen(function* () {
-    return {
-      watch: () => Stream.make(item),
-      get: (_id: string) => Effect.succeed(item),
-      claim: (_id: string) => Effect.succeed({ ...item, claimedAt: new Date() }),
-      release: (_id: string) => Effect.succeed({ ...item, claimedAt: undefined }),
-    };
-  }),
-);
+export const MockIntakeLive = Layer.succeed(Intake, {
+  watch: () => Stream.make(item),
+  get: (_id: string) => Effect.succeed(item),
+  claim: (_id: string) => Effect.succeed({ ...item, claimedAt: new Date() }),
+  release: (_id: string) => Effect.succeed({ ...item, claimedAt: undefined }),
+});
