@@ -1,9 +1,5 @@
 import { Data } from "effect";
 
-export class DialogueWorkspaceNotFound extends Data.TaggedError("DialogueWorkspaceNotFound")<{
-  workspaceId: string;
-}> {}
-
 export class DialogueStreamError extends Data.TaggedError("DialogueStreamError")<{
   workspaceId: string;
   cause: string;
