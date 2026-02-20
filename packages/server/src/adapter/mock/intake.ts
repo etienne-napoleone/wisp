@@ -8,6 +8,7 @@ const item: IntakeItem = {
   title: "Missing price in USD",
   description: "Missing USD price in source price stream since last update",
   author: "etienne-napoleone",
+  claimedAt: undefined,
 };
 
 export const MockIntakeLive = Layer.effect(
@@ -16,8 +17,8 @@ export const MockIntakeLive = Layer.effect(
     return {
       watch: () => Stream.make(item),
       get: (_id: string) => Effect.succeed(item),
-      claim: (_id: string) => Effect.succeed(true),
-      release: (_id: string) => Effect.succeed(true),
+      claim: (_id: string) => Effect.succeed({ ...item, claimedAt: new Date() }),
+      release: (_id: string) => Effect.succeed({ ...item, claimedAt: undefined }),
     };
   }),
 );
